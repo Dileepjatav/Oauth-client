@@ -1,70 +1,100 @@
-# Getting Started with Create React App
+# OAuth-Client 🔐 (React + Google OAuth + JWT)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is a React-based frontend application that demonstrates **Google OAuth 2.0 authentication** with **JWT-based login flow**. The app allows users to securely log in using their Google accounts, receive a JWT token from the backend, and access protected resources.
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## 🌐 Features
 
-### `npm start`
+- 🔐 Google OAuth2 Login using `@react-oauth/google`
+- 🧾 JWT token-based authentication
+- 💡 Built for integration with any Node.js/Express backend
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+---
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 🛠️ Tech Stack
 
-### `npm test`
+- **React** (with Vite or CRA)
+- **@react-oauth/google**
+- **JWT (via backend API)**
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+---
 
-### `npm run build`
+## 🚀 Getting Started
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### 1. Clone the Repository
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```bash
+git clone https://github.com/your-username/oauth-client.git
+cd oauth-client
+2. Install Dependencies
+bash
+Copy
+Edit
+npm install
+3. Create a .env File
+Create a .env file in the root of the React project:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+env
+Copy
+Edit
+REACT_APP_GOOGLE_CLIENT_ID=your_google_client_id
+REACT_APP_BACKEND_API=http://localhost:5000  # or your actual backend URL
+🔑 How to Get Google Client ID
+Go to Google Cloud Console
 
-### `npm run eject`
+Create a new project or use an existing one.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Enable OAuth 2.0 Client IDs from APIs & Services > Credentials
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Set:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Authorized JavaScript origins: http://localhost:3000
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Authorized redirect URIs: leave empty (handled client-side)
 
-## Learn More
+Copy the Client ID and paste it into your .env
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+🧠 Usage
+📥 On Successful Login:
+js
+Copy
+Edit
+onSuccess={async (credentialResponse) => {
+  const result = await axios.post(`${process.env.REACT_APP_BACKEND_API}/api/auth/google`, {
+    token: credentialResponse.credential,
+  });
+  // Use result.data.token if returned from backend
+}}
+📁 Folder Structure
+java
+Copy
+Edit
+oauth-client/
+│
+├── public/
+├── src/
+│   ├── components/
+│   ├── pages/
+│   └── App.js
+├── .env
+├── package.json
+└── README.md
+🛡️ Security Notes
+Use HttpOnly cookies to store JWTs to prevent XSS attacks.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Consider using CSRF protection if storing tokens in cookies.
 
-### Code Splitting
+In production, always use https:// for secure token exchange.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+🤝 Contributing
+Pull requests are welcome! For major changes, please open an issue first to discuss what you would like to change.
 
-### Analyzing the Bundle Size
+📄 License
+MIT License. Feel free to use, share, and improve.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+📬 Contact
+Author: Dileep jatav
+https://dileepjatav.com
 
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Email: Dileepkhurana73@gmail.com
